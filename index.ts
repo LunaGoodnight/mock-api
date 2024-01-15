@@ -1,4 +1,4 @@
-import express, { Request, Response } from "express";
+import express, {Request, Response} from "express";
 import cors from "cors"; // Import CORS module
 
 const app = express();
@@ -8,13 +8,71 @@ app.use(cors());
 app.use(express.json());
 
 
-const bannerDetail = {
-
+const bannerDetailFirst = {
   bannerId: 1,
   title: {
-
-  }
+    1: 'cute luna',
+    2: '',
+    3: 'adfadsf',
+    4: 'adfadsf',
+    5: 'adfadsf',
+    6: 'adfadsf',
+    7: 'adfadsf',
+  },
+  sequence: 11,
+  imageSrc: 'http://placekitten.com/300/300',
+  internalLinkType:1,
+  eventId: 123,
+  accountSettingProductMarketId: 22,
+  categoryId:33
 }
+const bannerDetailSecond = {
+  bannerId: 1,
+  title: {
+    1: '發大財',
+    2: '想睡覺',
+    3: '喝咖啡',
+    4: '吃蛋糕',
+    5: '摸貓咪',
+    6: '睡覺覺',
+    7: '追劇劇',
+  },
+  sequence: 11,
+  imageSrc: 'http://placekitten.com/300/300',
+  internalLinkType:1,
+  eventId: 123,
+  accountSettingProductMarketId: 22,
+  categoryId:33
+}
+const bannerDetailDictionary = {
+  1: bannerDetailFirst,
+  2: bannerDetailSecond,
+}
+const productList = [
+  {
+    accountSettingProductMarketId: 3,
+  },
+  {
+    accountSettingProductMarketId: 2
+  },
+  {
+    accountSettingProductMarketId: 21
+  },
+  {
+    accountSettingProductMarketId: 22
+  },
+];
+const eventList = [
+  {
+    id: 1,
+    title: 'cuteLuna'
+  },
+  {
+    id: 2,
+    title: 'abc'
+  },
+
+];
 const list = [
   {
     bannerId: 1,
@@ -45,7 +103,24 @@ const list = [
 app.get("/", (req: Request, res: Response) => {
   res.send("Hello, world!");
 });
-
+app.get("/api/DropdownList/Event", (request, response) => {
+  const res = {
+    data: eventList,
+    statusCode: 0,
+    message: "",
+    traceId: "0HN01T81M1Q1G:00000004",
+  };
+  response.send(res);
+});
+app.get("/api/DropdownList/Product", (request, response) => {
+  const res = {
+    data: productList,
+    statusCode: 0,
+    message: "",
+    traceId: "0HN01T81M1Q1G:00000004",
+  };
+  response.send(res);
+});
 app.get("/api/LobbyManagement/QuickBanner/List", (request, response) => {
   const res = {
     data: list,
@@ -58,8 +133,22 @@ app.get("/api/LobbyManagement/QuickBanner/List", (request, response) => {
 
 
 app.get("/api/LobbyManagement/QuickBanner/Management", (request, response) => {
+
+
   const res = {
-    data: bannerDetail,
+    data: bannerDetailDictionary[1],
+    statusCode: 0,
+    message: "",
+    traceId: "0HN01T81M1Q1G:00000004",
+  };
+  response.send(res);
+});
+app.put("/api/LobbyManagement/QuickBanner/Management", (request, response) => {
+
+
+
+  const res = {
+    data: bannerDetailDictionary[1],
     statusCode: 0,
     message: "",
     traceId: "0HN01T81M1Q1G:00000004",
